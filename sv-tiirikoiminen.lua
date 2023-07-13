@@ -29,3 +29,21 @@ AddEventHandler('Tupe:tiirikkarikki', function ()
 	local xPlayer = ESX.GetPlayerFromId(src)
 	xPlayer.removeInventoryItem(item, 1)
 end)
+
+RegisterServerEvent('tupe:SoitanPoliisille')
+AddEventHandler('tupe:SoitanPoliisille', function(pos)
+	TriggerClientEvent('tupe:SoitanPoliisille', -1, pos)
+end)
+
+function KuinkamontaPoliisia()
+	local xPlayers = ESX.GetPlayers()
+	poliisit = 0
+	
+	for i=1, #xPlayers, 1 do
+		local xPlayer = ESX.GetPlayerFromId(xPlayers[i])
+		if xPlayer.job.name == 'police' then
+			poliisit = poliisit + 1
+		end
+	end
+	SetTimeout(1*1000*60, KuinkamontaPoliisia)
+end
